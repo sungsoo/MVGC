@@ -1,0 +1,45 @@
+{
+    "common_params": {
+        "hidden_channels": 32,
+        "learning_rate": 0.01,
+        "epochs": 10,
+        "distillation_epochs": 10,
+        "test_size": 0.3,
+        "random_state": 42
+    },
+    "gnn_specific_params": {
+        "RGCN": {
+            "num_relations": 2
+        },
+        "HGT": {
+            "num_heads": 4
+        },
+        "HAN": {
+            "num_heads": 8
+        },
+        "HAHE": {
+            "num_heads": 8
+        },
+        "QUAD": {
+            "num_heads": 8
+        },
+        "OnDeviceHRGNN": {
+            "student_model_type": "LightHGNN", 
+            "distillation_temp": 2.0,
+            "distillation_alpha": 0.5        
+        },
+        "CMVHRKG": {
+            "num_heads": 8,
+            "kobert_embedding_size": 768
+        },
+        "StarE": {
+        },        
+        "GeneralConv": {
+            "aggr": "sum"
+        },
+        "FiLMConv": {
+            "num_qualifiers": 10
+        }
+    },
+    "voice_phishing_threshold": 0.5
+}

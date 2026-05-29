@@ -1,0 +1,16 @@
+{
+  "num_samples": 2927,
+  "label_counts": {
+    "0": 2232,
+    "1": 695
+  },
+  "seeds": [
+    13,
+    17,
+    23,
+    29,
+    31
+  ],
+  "scenario_signature_groups": 523,
+  "scope_note": "CPU controlled-protocol experiments with transparent lexical and HRKG controls; the original PyG/KoBERT MVGC score is retained from the manuscript because optional PyG/Transformers dependencies are not required by this reproducibility runner. The extractor precision/recall table uses the packaged type-level silver review sample rather than an external human span annotation corpus."
+}

@@ -36,12 +36,7 @@ mvgc_full_neural_multiseed.py
 mvgc_hyperparameter_sensitivity.py
 generate_paper_figures_v3.py
 requirements_mvgc.txt
-README_MVGC.md
-RESULTS_V3.md
-REPRODUCIBILITY.md
-HYPERPARAMETER_SENSITIVITY_V4.md
-HYPERPARAMETER_SENSITIVITY_SYNC_V4.md
-VERSION.txt
+README.md
 ```
 
 Key files:

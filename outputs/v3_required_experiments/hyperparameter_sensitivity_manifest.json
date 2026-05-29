@@ -1,0 +1,36 @@
+{
+  "script": "mvgc_hyperparameter_sensitivity.py",
+  "seeds": [
+    13
+  ],
+  "lambda_grid": [
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8
+  ],
+  "tau_grid": [
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.5,
+    0.7,
+    1.0
+  ],
+  "radius_grid": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "default_lambda": 0.5,
+  "default_tau": 0.2,
+  "default_radius": 2,
+  "epochs": 5,
+  "batch_size": 512,
+  "note": "Figure 3 is generated from actual multi-seed validation experiments, not from hard-coded sensitivity values."
+}

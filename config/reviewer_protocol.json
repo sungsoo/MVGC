@@ -1,0 +1,61 @@
+{
+  "split": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15,
+    "stratify": true
+  },
+  "seeds": [
+    13,
+    17,
+    23
+  ],
+  "text_baseline": {
+    "vectorizer": "hashing",
+    "analyzer": "word",
+    "ngram_range": [
+      1,
+      1
+    ],
+    "n_features": 32768,
+    "alternate_sign": false,
+    "norm": "l2",
+    "class_weight": "balanced",
+    "max_iter": 50,
+    "alpha": 1e-05,
+    "random_state": 13,
+    "max_chars": 6000
+  },
+  "graph_feature_baseline": {
+    "class_weight": "balanced",
+    "max_iter": 2000
+  },
+  "late_fusion": {
+    "class_weight": "balanced",
+    "max_iter": 50,
+    "alpha": 1e-05,
+    "random_state": 13
+  },
+  "noise": {
+    "rates": [
+      0.0,
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "groups": [
+      "entity",
+      "relation",
+      "qualifier"
+    ]
+  },
+  "calibration": {
+    "ece_bins": 10
+  },
+  "privacy": {
+    "redact_pii_before_hrkg_storage": true,
+    "hash_entity_surface_forms": true,
+    "retain_raw_transcripts": false
+  }
+}
