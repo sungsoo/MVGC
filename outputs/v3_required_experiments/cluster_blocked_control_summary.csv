@@ -1,9 +1,0 @@
-model,split_type,partial_chars,accuracy_mean,precision_mean,recall_mean,f1_mean,roc_auc_mean,pr_auc_mean,ece_mean,accuracy_std,precision_std,recall_std,f1_std,roc_auc_std,pr_auc_std,ece_std
-noncontrastive_lexical_entity_early_fusion,scenario_signature_blocked,0,1.0,1.0,1.0,1.0,1.0,1.0,2.86577296125899e-09,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-noncontrastive_lexical_hrkg_early_fusion,scenario_signature_blocked,0,1.0,1.0,1.0,1.0,1.0,1.0,5.524410542438726e-12,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-noncontrastive_lexical_structural_early_fusion,scenario_signature_blocked,0,1.0,1.0,1.0,1.0,1.0,1.0,1.1971963985784827e-11,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-retuned_entity_view_lr,scenario_signature_blocked,0,0.8891454965357969,0.7391304347826088,0.8252427184466019,0.7798165137614679,0.9633421594586643,0.895135537057469,0.08803543060665071,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-retuned_hrkg_all_lr,scenario_signature_blocked,0,0.9330254041570439,0.8363636363636363,0.8932038834951457,0.863849765258216,0.9761988820241246,0.911779391022023,0.05054502050862719,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-retuned_structural_view_lr,scenario_signature_blocked,0,0.9214780600461894,0.8285714285714286,0.8446601941747572,0.8365384615384616,0.9669020300088261,0.8947093211637728,0.08211993744475987,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-retuned_text_hrkg_late_fusion,scenario_signature_blocked,0,0.9976905311778291,1.0,0.9902912621359223,0.9951219512195122,0.9996175345689909,0.9989119517910948,0.042197817382050105,0.0,0.0,0.0,0.0,0.0,0.0,0.0
-retuned_text_only_lexical_lr,scenario_signature_blocked,0,0.9976905311778291,1.0,0.9902912621359223,0.9951219512195122,1.0,1.0,0.0031862133446000297,0.0,0.0,0.0,0.0,0.0,0.0,0.0
