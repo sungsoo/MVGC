@@ -647,10 +647,6 @@ cat outputs/v3_required_experiments/cluster_blocked_control_summary.csv
 cat outputs/v3_required_experiments/partial_transcript_summary.csv
 cat outputs/v3_required_experiments/hyperparameter_sensitivity_summary.csv
 
-# Check figures
-ls figures/vpd_diagram.pdf
-ls figures/results.pdf
-ls figures/fig3_hyperparameter_sensitivity.pdf
 ```
 
 ---
