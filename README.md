@@ -591,43 +591,7 @@ This optional retraining path requires PyTorch-Geometric and related dependencie
 
 ---
 
-## 17. Rebuilding the Paper PDF
-
-The implementation package reproduces the experimental results. The paper PDF should be rebuilt from the LaTeX paper package.
-
-Assuming the paper package is named:
-
-```text
-mvgc-paper-v4-fontspacing-final.zip
-```
-
-Extract and compile:
-
-```bash
-cd ~/work/mvgc
-unzip mvgc-paper-v4-fontspacing-final.zip -d mvgc-paper-v4
-cd mvgc-paper-v4
-
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
-```
-
-If you regenerate figures from the code package and want to update the paper package, copy the updated figures before recompiling:
-
-```bash
-cp ~/work/mvgc/mvgc-v4/figures/fig3_hyperparameter_sensitivity.pdf ./figures/
-
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
-```
-
----
-
-## 18. One-Shot Reproduction Script
+## 17. One-Shot Reproduction Script
 
 The following command sequence reproduces the core experimental results from a clean setup:
 
@@ -691,7 +655,7 @@ ls figures/fig3_hyperparameter_sensitivity.pdf
 
 ---
 
-## 19. Citation
+## 18. Citation
 
 If you use this repository, please cite the associated paper:
 
@@ -707,7 +671,7 @@ Please update the citation entry once the final bibliographic information become
 
 ---
 
-## 20. Notes on Data and Privacy
+## 19. Notes on Data and Privacy
 
 Voice phishing transcripts may contain sensitive personal or conversational information. If raw transcripts cannot be redistributed due to privacy or licensing constraints, users should release or use anonymized dataset artifacts, hashed split identifiers, extracted features, and reproducibility scripts in accordance with applicable data governance policies.
 
