@@ -212,7 +212,7 @@ def run_noise(df,lexical,features,out_dir,seeds=SEEDS):
     return pd.DataFrame(rows)
 
 def main():
-    ap=argparse.ArgumentParser(); ap.add_argument('--data',default='dataset/voicephishing_data.csv'); ap.add_argument('--config_dir',default='config'); ap.add_argument('--output_dir',default='outputs/v3_required_experiments'); args=ap.parse_args()
+    ap=argparse.ArgumentParser(); ap.add_argument('--data',default='dataset/voicephishing_data.csv'); ap.add_argument('--config_dir',default='config'); ap.add_argument('--output_dir',default='outputs/required_experiments'); args=ap.parse_args()
     out=Path(args.output_dir); out.mkdir(parents=True,exist_ok=True)
     df=pd.read_csv(args.data)[['id','transcript','label']].copy(); df.transcript=df.transcript.map(normalize_text); df.label=df.label.astype(int); df=df.reset_index(drop=True)
     ner=load_json(Path(args.config_dir)/'ner_relations.json'); qual=load_json(Path(args.config_dir)/'qualifiers.json')

@@ -1,0 +1,240 @@
+{"id": 2825, "entities": ["bank_account", "credit_card", "loan", "money"], "relations": ["demands_money_transfer", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 98, "entities": ["security_code", "money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1520, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2347, "entities": ["bank_account", "personal_information", "security_code"], "relations": ["requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1312, "entities": ["money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2779, "entities": ["police_officer", "bank_account", "personal_information", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2474, "entities": ["prosecutor", "bank_account", "money"], "relations": ["impersonates_official", "demands_money_transfer", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure"]}
+{"id": 2330, "entities": ["bank_account", "credit_card", "personal_information"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2302, "entities": ["government_agency", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2817, "entities": ["government_agency", "bank_account", "credit_card", "loan", "personal_information", "money"], "relations": ["demands_money_transfer", "requests_personal_info", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2828, "entities": ["police_officer", "prosecutor", "bank_account", "credit_card", "loan", "personal_information", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2552, "entities": ["bank_account", "money"], "relations": [], "qualifiers": ["transfer_channel"]}
+{"id": 2805, "entities": ["money"], "relations": [], "qualifiers": []}
+{"id": 268, "entities": ["government_agency", "money"], "relations": ["normal_call"], "qualifiers": []}
+{"id": 2374, "entities": ["personal_information"], "relations": ["requests_personal_info", "threatens_arrest"], "qualifiers": ["coercive_pressure"]}
+{"id": 1911, "entities": ["money", "family_member"], "relations": ["warns_against_disclosure", "creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2536, "entities": ["police_officer", "prosecutor", "bank_account", "credit_card", "personal_information", "security_code", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2846, "entities": ["money"], "relations": [], "qualifiers": []}
+{"id": 1837, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2762, "entities": ["loan"], "relations": [], "qualifiers": ["requested_action_type", "transfer_channel"]}
+{"id": 1996, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2699, "entities": ["credit_card", "personal_information"], "relations": ["requests_personal_info"], "qualifiers": ["transfer_channel"]}
+{"id": 825, "entities": ["money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2873, "entities": ["police_officer", "prosecutor", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1161, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2505, "entities": ["police_officer", "bank_account", "loan", "personal_information"], "relations": ["requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1403, "entities": ["police_officer", "prosecutor", "credit_card", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "transfer_channel", "temporal_pressure"]}
+{"id": 2306, "entities": ["police_officer", "bank_account", "credit_card", "personal_information", "money"], "relations": ["requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2897, "entities": ["loan"], "relations": [], "qualifiers": ["requested_action_type"]}
+{"id": 820, "entities": ["money"], "relations": ["warns_against_disclosure", "threatens_arrest", "normal_call"], "qualifiers": []}
+{"id": 2677, "entities": ["money"], "relations": [], "qualifiers": []}
+{"id": 189, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2139, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1622, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2766, "entities": ["credit_card", "loan", "personal_information", "money", "family_member"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 764, "entities": ["prosecutor", "money"], "relations": ["impersonates_official", "demands_money_transfer", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "requested_action_type", "temporal_pressure"]}
+{"id": 2449, "entities": ["police_officer", "personal_information"], "relations": ["requests_personal_info", "threatens_arrest"], "qualifiers": []}
+{"id": 1134, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2869, "entities": ["personal_information"], "relations": ["requests_personal_info"], "qualifiers": []}
+{"id": 2461, "entities": ["government_agency", "bank_account", "money"], "relations": ["impersonates_official", "demands_money_transfer", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel"]}
+{"id": 135, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 203, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 353, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 514, "entities": ["police_officer", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 641, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2464, "entities": ["bank_account", "credit_card", "personal_information"], "relations": ["requests_personal_info", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure"]}
+{"id": 854, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2157, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 1228, "entities": ["personal_information", "money", "family_member"], "relations": ["requests_personal_info", "creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 73, "entities": ["bank_account", "money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2241, "entities": [], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 70, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1159, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2655, "entities": ["bank_account", "credit_card", "personal_information", "security_code", "money"], "relations": ["demands_money_transfer", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 320, "entities": ["prosecutor", "money"], "relations": ["impersonates_official", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "requested_action_type", "temporal_pressure"]}
+{"id": 2709, "entities": ["bank_account"], "relations": ["demands_money_transfer", "creates_urgency"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2593, "entities": ["government_agency", "bank_account", "loan", "money"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 1937, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2714, "entities": ["police_officer", "prosecutor", "government_agency", "bank_account", "credit_card", "loan", "personal_information", "security_code", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1855, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 294, "entities": ["money"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 1021, "entities": ["government_agency", "money"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["requested_action_type", "temporal_pressure"]}
+{"id": 1001, "entities": ["government_agency", "money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2643, "entities": ["money"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["temporal_pressure"]}
+{"id": 2827, "entities": ["bank_account", "credit_card", "security_code", "money"], "relations": ["requests_security_code", "warns_against_disclosure", "creates_urgency", "normal_call"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2292, "entities": [], "relations": ["creates_urgency"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 336, "entities": ["money", "family_member"], "relations": ["warns_against_disclosure", "normal_call"], "qualifiers": []}
+{"id": 1979, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2436, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information", "security_code"], "relations": ["impersonates_official", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2551, "entities": ["prosecutor"], "relations": ["impersonates_official", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 544, "entities": ["money"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["temporal_pressure"]}
+{"id": 2759, "entities": ["bank_account", "loan", "personal_information", "money"], "relations": ["demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2502, "entities": ["prosecutor", "government_agency", "bank_account", "personal_information", "security_code", "money"], "relations": ["impersonates_official", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency"], "qualifiers": ["institutional_pretext", "transfer_channel", "temporal_pressure"]}
+{"id": 620, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1969, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1720, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1123, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2808, "entities": ["bank_account", "money", "family_member"], "relations": ["demands_money_transfer", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 1648, "entities": ["family_member"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 597, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2607, "entities": ["police_officer", "prosecutor", "bank_account", "loan", "personal_information", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 702, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2765, "entities": ["loan", "money"], "relations": ["creates_urgency"], "qualifiers": ["requested_action_type", "temporal_pressure"]}
+{"id": 369, "entities": ["personal_information", "family_member"], "relations": ["requests_personal_info", "warns_against_disclosure", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2812, "entities": ["police_officer", "prosecutor", "government_agency", "bank_account", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 606, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1795, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1620, "entities": ["personal_information", "money", "family_member"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2423, "entities": ["government_agency", "bank_account", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure"]}
+{"id": 402, "entities": ["money"], "relations": ["creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2331, "entities": ["prosecutor"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 2133, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1921, "entities": ["personal_information", "money", "family_member"], "relations": ["requests_personal_info", "creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2022, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1324, "entities": ["security_code", "money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2621, "entities": ["police_officer", "prosecutor", "government_agency", "bank_account", "credit_card", "loan", "personal_information", "security_code", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1009, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["requested_action_type", "coercive_pressure", "temporal_pressure"]}
+{"id": 455, "entities": ["money"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2254, "entities": ["police_officer", "prosecutor", "government_agency", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 672, "entities": ["money", "family_member"], "relations": ["creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2289, "entities": [], "relations": ["creates_urgency"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 1431, "entities": ["prosecutor", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 1480, "entities": ["police_officer", "money"], "relations": ["impersonates_official", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 2493, "entities": ["loan", "money"], "relations": ["warns_against_disclosure", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2886, "entities": ["bank_account", "loan", "money"], "relations": ["demands_money_transfer", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 1740, "entities": ["money"], "relations": ["creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 719, "entities": ["money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2840, "entities": ["bank_account", "money"], "relations": ["creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 1364, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2296, "entities": ["bank_account", "money"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2686, "entities": [], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2210, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2799, "entities": ["credit_card", "loan", "money"], "relations": ["creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2434, "entities": [], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2217, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2918, "entities": ["police_officer", "bank_account", "personal_information", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 265, "entities": ["money", "family_member"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["temporal_pressure"]}
+{"id": 2611, "entities": ["bank_account", "credit_card", "loan", "money"], "relations": ["creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2877, "entities": ["loan", "personal_information", "money"], "relations": ["demands_money_transfer", "requests_personal_info", "creates_urgency"], "qualifiers": ["requested_action_type", "temporal_pressure"]}
+{"id": 2167, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2510, "entities": ["bank_account", "loan", "money"], "relations": ["demands_money_transfer"], "qualifiers": ["requested_action_type", "transfer_channel"]}
+{"id": 2631, "entities": ["bank_account", "credit_card", "money"], "relations": ["creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 819, "entities": ["government_agency", "money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 677, "entities": ["money"], "relations": ["creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2425, "entities": ["police_officer", "government_agency", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 615, "entities": ["prosecutor", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 2468, "entities": ["bank_account", "credit_card", "personal_information"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 2116, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 405, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2689, "entities": ["bank_account", "money"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 201, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2901, "entities": ["prosecutor", "government_agency", "bank_account", "credit_card", "security_code", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 427, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2513, "entities": ["police_officer", "government_agency", "bank_account", "loan", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1791, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2400, "entities": ["police_officer", "bank_account"], "relations": ["threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure"]}
+{"id": 1936, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1481, "entities": ["prosecutor", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 2835, "entities": ["loan", "money"], "relations": ["creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2555, "entities": ["personal_information"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 1471, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2285, "entities": ["prosecutor", "personal_information"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 2372, "entities": ["bank_account", "personal_information", "money"], "relations": ["requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 2576, "entities": ["bank_account", "credit_card"], "relations": ["threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure"]}
+{"id": 1470, "entities": ["security_code", "money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1862, "entities": ["security_code", "money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 924, "entities": ["prosecutor", "government_agency", "money", "family_member"], "relations": ["impersonates_official", "warns_against_disclosure", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 97, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1207, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2626, "entities": ["bank_account", "credit_card", "personal_information"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2615, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information", "security_code", "money"], "relations": ["impersonates_official", "requests_personal_info", "requests_security_code", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "temporal_pressure"]}
+{"id": 2736, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information", "money", "family_member"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2872, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2359, "entities": [], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2860, "entities": ["prosecutor", "bank_account", "personal_information", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 636, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2742, "entities": ["prosecutor", "bank_account", "loan", "money"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 221, "entities": ["money"], "relations": ["normal_call"], "qualifiers": []}
+{"id": 512, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2341, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2537, "entities": ["prosecutor", "bank_account", "personal_information", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2903, "entities": ["government_agency", "money"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 2441, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information", "security_code", "money"], "relations": ["impersonates_official", "requests_personal_info", "requests_security_code", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2180, "entities": ["money"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2532, "entities": ["loan", "money"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 375, "entities": ["prosecutor", "money"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 2717, "entities": ["police_officer", "government_agency", "bank_account", "personal_information", "security_code", "money", "family_member"], "relations": ["demands_money_transfer", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2890, "entities": ["credit_card", "security_code", "money"], "relations": ["requests_security_code", "warns_against_disclosure", "creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 2452, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure"]}
+{"id": 2245, "entities": ["prosecutor", "loan", "money"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 1506, "entities": ["prosecutor", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 2880, "entities": ["police_officer", "prosecutor", "government_agency", "bank_account", "credit_card", "personal_information", "security_code", "money", "family_member"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "requests_security_code", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2667, "entities": ["loan", "money"], "relations": ["demands_money_transfer", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2528, "entities": ["loan", "money"], "relations": [], "qualifiers": ["requested_action_type"]}
+{"id": 317, "entities": ["government_agency", "money", "family_member"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["temporal_pressure"]}
+{"id": 570, "entities": ["money"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 484, "entities": ["personal_information", "money"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 1385, "entities": ["personal_information", "money", "family_member"], "relations": ["requests_personal_info", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1649, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2567, "entities": ["bank_account", "credit_card", "personal_information", "money"], "relations": ["requests_personal_info"], "qualifiers": ["transfer_channel", "coercive_pressure"]}
+{"id": 2731, "entities": ["police_officer", "prosecutor", "personal_information"], "relations": ["impersonates_official", "requests_personal_info", "threatens_arrest"], "qualifiers": ["institutional_pretext", "coercive_pressure"]}
+{"id": 2624, "entities": ["loan"], "relations": [], "qualifiers": ["requested_action_type"]}
+{"id": 2681, "entities": ["bank_account", "personal_information", "money"], "relations": ["requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 2467, "entities": ["prosecutor", "money"], "relations": ["impersonates_official", "creates_urgency"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 442, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1909, "entities": ["police_officer", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 571, "entities": ["money"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2684, "entities": [], "relations": [], "qualifiers": ["transfer_channel"]}
+{"id": 1590, "entities": ["prosecutor", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "normal_call"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 164, "entities": ["money", "family_member"], "relations": ["creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2838, "entities": ["bank_account"], "relations": ["creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 2515, "entities": [], "relations": [], "qualifiers": ["transfer_channel"]}
+{"id": 1949, "entities": ["prosecutor", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "coercive_pressure", "temporal_pressure"]}
+{"id": 1355, "entities": ["money", "family_member"], "relations": ["warns_against_disclosure", "creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1727, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 782, "entities": ["money"], "relations": ["creates_urgency", "threatens_arrest"], "qualifiers": ["temporal_pressure"]}
+{"id": 2460, "entities": ["bank_account", "credit_card"], "relations": ["threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure"]}
+{"id": 1396, "entities": ["money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2746, "entities": ["bank_account", "money"], "relations": ["demands_money_transfer"], "qualifiers": ["requested_action_type", "transfer_channel"]}
+{"id": 2716, "entities": ["bank_account", "personal_information", "money"], "relations": ["demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2867, "entities": ["government_agency", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2774, "entities": ["police_officer", "prosecutor", "bank_account"], "relations": ["impersonates_official", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure"]}
+{"id": 2556, "entities": ["police_officer", "prosecutor", "government_agency", "bank_account", "loan", "personal_information", "security_code", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "requests_security_code", "warns_against_disclosure", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2550, "entities": ["bank_account", "personal_information", "money"], "relations": ["requests_personal_info", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure"]}
+{"id": 713, "entities": ["money"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 229, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1455, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2491, "entities": ["bank_account", "loan", "personal_information", "money", "family_member"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 2712, "entities": ["bank_account", "personal_information"], "relations": ["requests_personal_info", "creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 1973, "entities": ["family_member"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 1965, "entities": ["money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2599, "entities": ["police_officer", "prosecutor", "government_agency", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "warns_against_disclosure", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2385, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1234, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 431, "entities": ["money", "family_member"], "relations": ["normal_call"], "qualifiers": []}
+{"id": 2568, "entities": ["government_agency", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1755, "entities": ["police_officer", "money", "family_member"], "relations": ["impersonates_official", "creates_urgency", "threatens_arrest", "normal_call"], "qualifiers": ["institutional_pretext", "temporal_pressure"]}
+{"id": 1537, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1250, "entities": ["loan", "money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["requested_action_type", "temporal_pressure"]}
+{"id": 2360, "entities": [], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2471, "entities": ["prosecutor", "bank_account", "credit_card", "personal_information"], "relations": ["impersonates_official", "requests_personal_info", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure"]}
+{"id": 1686, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2380, "entities": ["government_agency", "bank_account", "credit_card", "personal_information", "money"], "relations": ["impersonates_official", "requests_personal_info", "creates_urgency"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 1335, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2370, "entities": ["prosecutor", "money"], "relations": ["impersonates_official", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure"]}
+{"id": 2704, "entities": ["bank_account", "money"], "relations": ["demands_money_transfer"], "qualifiers": ["requested_action_type", "transfer_channel"]}
+{"id": 1479, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["coercive_pressure", "temporal_pressure"]}
+{"id": 2711, "entities": ["bank_account"], "relations": ["demands_money_transfer", "creates_urgency"], "qualifiers": ["requested_action_type", "transfer_channel", "temporal_pressure"]}
+{"id": 248, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 1279, "entities": ["credit_card", "money"], "relations": ["creates_urgency"], "qualifiers": ["transfer_channel", "temporal_pressure"]}
+{"id": 2777, "entities": ["police_officer", "government_agency", "bank_account", "credit_card", "loan", "personal_information", "money"], "relations": ["impersonates_official", "demands_money_transfer", "requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2480, "entities": ["bank_account", "credit_card", "personal_information"], "relations": ["requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2420, "entities": ["prosecutor", "bank_account", "money"], "relations": ["impersonates_official", "creates_urgency", "threatens_arrest"], "qualifiers": ["institutional_pretext", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 2911, "entities": ["bank_account", "credit_card", "personal_information"], "relations": ["requests_personal_info", "creates_urgency", "threatens_arrest"], "qualifiers": ["requested_action_type", "transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 959, "entities": ["money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 2916, "entities": ["bank_account"], "relations": ["creates_urgency"], "qualifiers": ["transfer_channel", "coercive_pressure", "temporal_pressure"]}
+{"id": 22, "entities": ["money", "family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 476, "entities": ["money", "family_member"], "relations": ["creates_urgency"], "qualifiers": ["temporal_pressure"]}
+{"id": 499, "entities": ["family_member"], "relations": ["creates_urgency", "normal_call"], "qualifiers": ["temporal_pressure"]}
+{"id": 2725, "entities": ["bank_account", "credit_card", "personal_information", "money"], "relations": ["demands_money_transfer", "requests_personal_info", "threatens_arrest"], "qualifiers": ["transfer_channel", "coercive_pressure"]}

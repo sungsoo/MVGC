@@ -177,8 +177,8 @@ def summarize(metrics: pd.DataFrame) -> pd.DataFrame:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--data', default='dataset/voicephishing_data.csv')
-    ap.add_argument('--feature_dir', default='outputs/v3_required_experiments')
-    ap.add_argument('--output_dir', default='outputs/v3_required_experiments')
+    ap.add_argument('--feature_dir', default='outputs/required_experiments')
+    ap.add_argument('--output_dir', default='outputs/required_experiments')
     args = ap.parse_args()
     out_dir = Path(args.output_dir); out_dir.mkdir(parents=True, exist_ok=True)
     df = pd.read_csv(args.data)

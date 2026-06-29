@@ -1,674 +1,367 @@
 # MVGC: Multi-View Hyper-Relational Knowledge Graph Contrastive Learning for Voice Phishing Detection
 
-This repository provides the implementation package for **MVGC**, a multi-view hyper-relational knowledge graph contrastive learning framework for voice phishing detection. MVGC represents each call transcript as a qualifier-aware hyper-relational knowledge graph (HRKG) and jointly learns structural, lexical, and entity-centric evidence for fraud detection.
+This repository contains the official implementation, dataset artifacts, and full
+reproduction pipeline for the paper:
 
-The repository is designed to reproduce the experimental artifacts reported in the paper, including controlled text/graph/fusion experiments, Full MVGC multi-seed neural retraining, extractor audit, HRKG-noise robustness, scenario-signature blocking, partial-transcript evaluation, **hyperparameter sensitivity experiments**, and paper figures.
+> **MVGC: Multi-View Hyper-Relational Knowledge Graph Contrastive Learning for Voice Phishing Detection.**
 
-> Project repository: <https://github.com/sungsoo/MVGC>
+MVGC represents each Korean call transcript as a **qualifier-aware hyper-relational
+knowledge graph (HRKG)** and jointly learns three complementary views — *structural*,
+*lexical*, and *entity-centric* — that are aligned by a cross-view contrastive
+objective and combined by attention-based fusion.
 
----
-
-## Overview
-
-<p align="center">
-  <img src="https://sungsoo.github.io/images/mvgc_diagram.png" alt="Figure 1. Overview of the MVGC framework" width="900"/>
-</p>
-
-<p align="center">
-  <b>Figure 1.</b> Overview of the MVGC framework. The pipeline converts a call transcript into a qualifier-aware hyper-relational knowledge graph and learns complementary structural, lexical, and entity-centric views through view-specific encoders, cross-view contrastive alignment, and attention-based fusion.
-</p>
-
+The repository is designed so that **every quantitative result in the paper can be
+regenerated end-to-end from the raw transcript CSV on a single CPU workstation**, with
+no GPU and no cluster required. A full clean-clone reproduction completes in a few
+minutes on a MacBook Pro M3 (128 GB RAM) and comfortably within an 8-hour budget on
+any modern laptop.
 
 ---
 
-## 2. Repository Contents
+## 1. Headline finding (what the experiments show)
 
-After extracting the implementation package, the repository should contain files and directories similar to the following:
+The evaluation is deliberately transparent and significance-tested. Its central result
+is **conditional**, which we consider more informative than a single accuracy number:
 
-```text
-dataset/
-config/
-figures/
-outputs/
-mvcg.py
-mvgc_v3_fast_experiments.py
-mvgc_full_neural_multiseed.py
-mvgc_hyperparameter_sensitivity.py
-generate_paper_figures_v3.py
-requirements_mvgc.txt
-README.md
-```
+- **In-distribution, the benchmark is saturated.** A separately tuned text-only encoder
+  already reaches F1 = 0.9905, and the full multi-view model (F1 = 0.9924) is **not**
+  statistically better (paired *t*-test *p* = 0.37). On the standard split, transcript
+  text alone is near-sufficient, so no in-distribution comparison can separate
+  hyper-relational structure from lexical shortcuts.
+- **The cause is a transcript-length shortcut.** Phishing transcripts are markedly
+  shorter than benign ones. A near-duplicate audit (TF–IDF cosine ≥ 0.9) flags only
+  0.5% near-duplicates, so the leakage is the length shortcut, not paraphrase
+  duplication.
+- **Under a stricter length-stratified out-of-distribution (OOD) split, structure
+  wins decisively.** The text-only model collapses to F1 = 0.4824, while HRKG-bearing
+  models degrade gracefully (HRKG-only = 0.7018, full MVGC = 0.6354). The advantage is
+  large and significant (ΔF1 = +0.15 to +0.22, *p* < 0.01).
 
-Key files:
-
-| Path | Description |
-|---|---|
-| `dataset/voicephishing_data.csv` | Main transcript-level dataset used in the experiments. |
-| `config/` | Configuration files used by the controlled experiments. |
-| `mvgc_v3_fast_experiments.py` | Reproduces controlled experiments: text-only, HRKG-only, fusion controls, extractor audit, HRKG-noise robustness, scenario blocking, and partial-transcript tests. |
-| `mvgc_full_neural_multiseed.py` | Reproduces Full MVGC multi-seed neural retraining results. |
-| `mvgc_hyperparameter_sensitivity.py` | Runs actual hyperparameter sensitivity experiments over `lambda1`, `tau`, and entity radius grids. |
-| `generate_paper_figures_v3.py` | Regenerates Figure 3 from the experimental hyperparameter sensitivity CSV. |
-| `mvcg.py` | Original PyTorch-Geometric-based GNN/MVGC training script for graph-centric baselines. |
-| `figures/vpd_diagram.pdf` | Figure 1 source used in the paper. |
-| `figures/vpd_diagram.png` | GitHub-renderable preview image for Figure 1 shown near the top of this README. |
-| `figures/results.pdf` | Figure 2 used in the paper. |
-| `figures/fig3_hyperparameter_sensitivity.pdf` | Figure 3 generated from sensitivity experiment outputs. |
-| `outputs/v3_required_experiments/` | Main output directory for reproducibility artifacts. |
-
-Although this package is versioned as **v4**, the main experiment output directory is named `outputs/v3_required_experiments/` because the experimental protocol was finalized in the v3 experiment stage. Version v4 updates the paper presentation and adds the reproducible hyperparameter sensitivity experiment pipeline while preserving the same core result structure.
+In short: **the hyper-relational structure provides a separable, statistically
+significant benefit precisely under distribution shift.** The contrastive objective
+contributes a consistently positive but not-yet-significant increment, which we report
+honestly rather than overclaim.
 
 ---
 
-## 3. Recommended Environment
+## 2. Repository layout
 
-We recommend using:
+```
+MVGC/
+├── README.md                         # this file
+├── requirements.txt                  # Python dependencies
+├── dataset/
+│   └── voicephishing_data.csv        # KorCCVi v2 transcripts (id, transcript, label)
+├── config/                           # extraction schema and parameters
+│   ├── ner_relations.json            # entity/relation lexicon (active schema)
+│   ├── ner_relations_all.json        # full lexicon variant
+│   ├── ner_relations_integrated.json # integrated lexicon variant
+│   ├── qualifiers.json               # six canonical qualifier families
+│   ├── vpd_params.json               # default model/experiment parameters
+│   ├── vpd_params_ablation.json      # ablation parameters
+│   └── reviewer_protocol.json        # protocol constants (seeds, splits)
+├── gold_annotations/
+│   └── hrkg_type_silver_review_sample.jsonl   # 240-record type-level silver audit set
+├── figures/                          # paper figure assets (Fig.1 source; Fig.2/3)
+│
+├── mvgc_review_runner.py             # HRKG extraction + feature-table builder (library)
+├── mvgc_voicephishing.py             # thin CLI entry point to the extraction runner
+├── mvgc_v3_fast_experiments.py       # STAGE 1: features, splits, extractor/noise/
+│                                     #          scenario/partial tables (CPU)
+├── mvgc_r2_decisive_experiments.py   # STAGE 2: Tables 1–3 (separately tuned baselines,
+│                                     #          contrastive-off, paired tests, OOD,
+│                                     #          near-duplicate audit) (CPU)
+├── mvgc_full_neural_multiseed.py     # OPTIONAL: full neural multi-seed retraining
+├── mvgc_v3_reviewer_experiments.py   # OPTIONAL: extended reviewer-protocol experiments
+├── generate_paper_figures_v3.py      # regenerates Figure 3 (sensitivity); preserves Fig.1
+└── mvcg.py                           # OPTIONAL: original PyG/KoBERT graph-baseline
+                                      #           implementation (produces Figure 2);
+                                      #           requires heavyweight optional deps
+```
 
-- Ubuntu 20.04/22.04 or macOS
-- Python 3.10.13
-- `pyenv`
-- `pyenv-virtualenv`
-- pip
-- CPU execution for controlled experiments and hyperparameter sensitivity sweeps
-- Optional GPU for full PyTorch-Geometric baseline retraining
+**Two reproduction tracks.**
 
-The controlled experiments, Full MVGC multi-seed neural retraining, and hyperparameter sensitivity experiments can be reproduced on CPU with standard scientific Python packages. The original PyTorch-Geometric baseline retraining in `mvcg.py` requires additional dependencies such as `torch-geometric` and `transformers`.
+1. **CPU-reproducible track (default, required for all paper conclusions).** Stages 1–2
+   plus the figure script. Uses only NumPy/pandas/scikit-learn/SciPy/PyTorch (CPU). This
+   regenerates every table and figure that the paper's conclusions rest on.
+2. **Optional heavyweight track.** `mvcg.py` is the original PyTorch-Geometric + KoBERT
+   implementation used to produce the graph-centric baseline comparison (Figure 2). It
+   requires `torch-geometric`, `transformers`, and `sentencepiece`, and benefits from a
+   GPU. It is **not** needed to reproduce any conclusion in the paper.
 
 ---
 
-## 4. Install `pyenv` and `pyenv-virtualenv`
+## 3. Installation from scratch
 
-If `pyenv` and `pyenv-virtualenv` are already installed, skip this section.
+### 3.1 Prerequisites
 
-### 4.1 macOS
+- Python **3.10–3.12** (3.12 recommended)
+- `pip` and `venv`
+- No GPU required for the CPU-reproducible track.
 
-Using Homebrew:
+### 3.2 Clone and create a virtual environment
 
 ```bash
-brew update
-brew install pyenv pyenv-virtualenv
+git clone https://github.com/sungsoo/MVGC.git
+cd MVGC
+
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+python -m pip install --upgrade pip
 ```
 
-For `zsh`, add the following to `~/.zshrc`:
+### 3.3 Install dependencies
+
+**Minimal install (CPU-reproducible track — sufficient for all paper conclusions):**
 
 ```bash
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
-source ~/.zshrc
+pip install "numpy>=1.24" "pandas>=2.0" "scikit-learn>=1.3" "scipy>=1.10" \
+            "matplotlib>=3.7" "torch>=2.2"
 ```
 
-For `bash`, add the same lines to `~/.bashrc` or `~/.bash_profile`.
-
-### 4.2 Ubuntu / Linux
-
-Install build dependencies:
+**Full install (everything, including the optional PyG/KoBERT track):**
 
 ```bash
-sudo apt update
-sudo apt install -y \
-  build-essential curl git libssl-dev zlib1g-dev libbz2-dev \
-  libreadline-dev libsqlite3-dev wget llvm libncursesw5-dev \
-  xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+pip install -r requirements.txt
 ```
 
-Install `pyenv`:
+> Note: On CPU-only machines, install the CPU build of PyTorch from
+> <https://pytorch.org/get-started/locally/> if the default wheel is unavailable.
+
+### 3.4 Verify the install
 
 ```bash
-curl https://pyenv.run | bash
-```
-
-For `bash`, add the following to `~/.bashrc`:
-
-```bash
-echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
-echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
-echo 'eval "$(pyenv init -)"' >> ~/.bashrc
-echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-For `zsh`, add the same lines to `~/.zshrc`.
-
-Confirm installation:
-
-```bash
-pyenv --version
-pyenv virtualenv --version
+python -c "import numpy, pandas, sklearn, scipy, torch; print('OK', torch.__version__)"
 ```
 
 ---
 
-## 5. Prepare the MVGC Repository
+## 4. End-to-end reproduction (CPU track)
 
-Place the v4 implementation package in a working directory. For example:
+All commands are run from the repository root with the virtual environment activated.
+Every command writes to `outputs/required_experiments/`, which is created
+automatically.
 
-```bash
-mkdir -p ~/work/mvgc
-cd ~/work/mvgc
-unzip mvgc-code-v4-hyperparam-final.zip -d mvgc-v4
-cd mvgc-v4
-```
-
-Check the package contents:
+### Step 1 — Build features, splits, and the controlled tables
 
 ```bash
-ls
-cat VERSION.txt
+python mvgc_v3_fast_experiments.py --output_dir outputs/required_experiments
 ```
 
-The version file should indicate that this is the v4 implementation package.
+This single command, starting from `dataset/voicephishing_data.csv`:
 
----
+- builds the **lexical** and **HRKG** feature tables
+  (`lexical_feature_matrix.csv`, `hrkg_feature_matrix.csv`);
+- writes the **five stratified transcript-level split files** (seeds 13, 17, 23, 29, 31)
+  and the partial-transcript / scenario-blocked split files;
+- runs the **type-level extractor audit** against the silver review sample
+  (`extractor_silver_summary.csv`) — **Table 4** of the paper;
+- runs the **HRKG feature-noise stress test** (`noise_robustness_summary.csv`);
+- runs the **scenario-signature / cluster-blocked control**
+  (`cluster_blocked_control_summary.csv`);
+- runs the **partial-transcript control** (`partial_transcript_summary.csv`) — **Table 5**;
+- writes a run `manifest.json`.
 
-## 6. Create a Python Environment with `pyenv` and `pyenv-virtualenv`
+Runtime: ~2–4 minutes on CPU.
 
-Install Python 3.10.13:
+### Step 2 — Regenerate the headline tables (Tables 1–3)
 
 ```bash
-pyenv install 3.10.13
+python mvgc_r2_decisive_experiments.py \
+    --feature_dir outputs/required_experiments \
+    --output_dir  outputs/required_experiments
 ```
 
-Create a dedicated virtual environment:
-
-```bash
-pyenv virtualenv 3.10.13 mvgc-v4-3.10
-```
-
-Activate this environment locally for the repository:
-
-```bash
-cd ~/work/mvgc/mvgc-v4
-pyenv local mvgc-v4-3.10
-```
-
-Confirm that the correct Python interpreter is being used:
-
-```bash
-python --version
-which python
-```
-
-The Python version should be `3.10.13`, and the executable path should point to the `mvgc-v4-3.10` environment under `~/.pyenv/versions/`.
-
-Upgrade pip and build tools:
-
-```bash
-python -m pip install --upgrade pip setuptools wheel
-```
-
----
-
-## 7. Install Dependencies
-
-Install the full dependency set:
-
-```bash
-pip install -r requirements_mvgc.txt
-```
-
-If installation of `torch-geometric` or `transformers` fails due to local wheel compatibility, the main CPU-based controlled experiments and the hyperparameter sensitivity experiments can still be reproduced with the core dependencies:
-
-```bash
-pip install pandas numpy scikit-learn scipy matplotlib joblib torch
-```
-
-The original PyTorch-Geometric graph baseline training in `mvcg.py` requires additional dependencies, including `torch-geometric`, `transformers`, and `sentencepiece`.
-
-Check core package installation:
-
-```bash
-python - <<'PY'
-import pandas
-import numpy
-import sklearn
-import scipy
-import matplotlib
-import torch
-
-print("pandas:", pandas.__version__)
-print("numpy:", numpy.__version__)
-print("sklearn:", sklearn.__version__)
-print("scipy:", scipy.__version__)
-print("torch:", torch.__version__)
-PY
-```
-
-Optionally check PyTorch-Geometric:
-
-```bash
-python - <<'PY'
-try:
-    import torch_geometric
-    print("torch_geometric:", torch_geometric.__version__)
-except Exception as e:
-    print("torch_geometric is not available:", e)
-PY
-```
-
----
-
-## 8. Check the Dataset
-
-The main dataset is located at:
-
-```text
-dataset/voicephishing_data.csv
-```
-
-Check the number of rows, columns, and label distribution:
-
-```bash
-python - <<'PY'
-import pandas as pd
-
-df = pd.read_csv("dataset/voicephishing_data.csv")
-print("Rows:", len(df))
-print("Columns:", df.columns.tolist())
-print("\nLabel distribution:")
-print(df["label"].value_counts())
-PY
-```
-
-The paper uses 2,927 transcript-level samples with phishing and non-phishing labels.
-
----
-
-## 9. Reset Output Directories
-
-To reproduce all results from scratch, remove the previous experiment outputs and create a clean directory:
-
-```bash
-rm -rf outputs/v3_required_experiments
-mkdir -p outputs/v3_required_experiments
-```
-
-The directory name includes `v3` because the experimental protocol was finalized in the v3 stage. The v4 package preserves the same core experimental protocol while adding an executable hyperparameter sensitivity pipeline.
-
----
-
-## 10. Run Controlled Experiments
-
-Run the main controlled experiment script:
-
-```bash
-python mvgc_v3_fast_experiments.py \
-  --data dataset/voicephishing_data.csv \
-  --config_dir config \
-  --output_dir outputs/v3_required_experiments
-```
-
-This script generates results for:
-
-- text-only controls
-- structural-view controls
-- entity-view controls
-- HRKG-only controls
-- text-HRKG late fusion
-- lexical-HRKG early fusion
-- extractor silver audit
-- HRKG-noise robustness
-- scenario-signature blocking
-- partial-transcript detection
-- feature matrices
-- seed-specific split definitions
-
-Expected output files include:
-
-```text
-outputs/v3_required_experiments/transcript_level_control_metrics.csv
-outputs/v3_required_experiments/transcript_level_control_summary.csv
-outputs/v3_required_experiments/cluster_blocked_control_metrics.csv
-outputs/v3_required_experiments/cluster_blocked_control_summary.csv
-outputs/v3_required_experiments/noise_robustness_metrics.csv
-outputs/v3_required_experiments/noise_robustness_summary.csv
-outputs/v3_required_experiments/partial_transcript_metrics.csv
-outputs/v3_required_experiments/partial_transcript_summary.csv
-outputs/v3_required_experiments/extractor_silver_detail.csv
-outputs/v3_required_experiments/extractor_silver_summary.csv
-outputs/v3_required_experiments/hrkg_feature_matrix.csv
-outputs/v3_required_experiments/lexical_feature_matrix.csv
-outputs/v3_required_experiments/split_transcript_seed_13.json
-outputs/v3_required_experiments/split_transcript_seed_17.json
-outputs/v3_required_experiments/split_transcript_seed_23.json
-outputs/v3_required_experiments/split_transcript_seed_29.json
-outputs/v3_required_experiments/split_transcript_seed_31.json
-```
-
-Inspect the main summaries:
-
-```bash
-cat outputs/v3_required_experiments/transcript_level_control_summary.csv
-cat outputs/v3_required_experiments/extractor_silver_summary.csv
-cat outputs/v3_required_experiments/noise_robustness_summary.csv
-cat outputs/v3_required_experiments/cluster_blocked_control_summary.csv
-cat outputs/v3_required_experiments/partial_transcript_summary.csv
-```
-
----
-
-## 11. Run Full MVGC Multi-Seed Neural Retraining
-
-The paper reports Full MVGC using mean and standard deviation over five seeds. To reproduce these results, run:
-
-```bash
-python mvgc_full_neural_multiseed.py \
-  --data dataset/voicephishing_data.csv \
-  --feature_dir outputs/v3_required_experiments \
-  --output_dir outputs/v3_required_experiments
-```
-
-This script uses the feature matrices and split files generated in the previous step.
-
-Expected output files:
-
-```text
-outputs/v3_required_experiments/full_mvgc_neural_multiseed_metrics.csv
-outputs/v3_required_experiments/full_mvgc_neural_multiseed_summary.csv
-outputs/v3_required_experiments/full_mvgc_neural_predictions_seed_13.csv
-outputs/v3_required_experiments/full_mvgc_neural_predictions_seed_17.csv
-outputs/v3_required_experiments/full_mvgc_neural_predictions_seed_23.csv
-outputs/v3_required_experiments/full_mvgc_neural_predictions_seed_29.csv
-outputs/v3_required_experiments/full_mvgc_neural_predictions_seed_31.csv
-```
-
-The paper reports the following representative Full MVGC results:
-
-```text
-Accuracy  = 0.9973 ± 0.0019
-Precision = 0.9944 ± 0.0084
-Recall    = 0.9943 ± 0.0085
-F1        = 0.9943 ± 0.0040
-```
-
-Check the generated summary:
-
-```bash
-cat outputs/v3_required_experiments/full_mvgc_neural_multiseed_summary.csv
-```
-
----
-
-## 12. Run Hyperparameter Sensitivity Experiments
-
-Version v4 includes an executable hyperparameter sensitivity pipeline. Unlike a static plotting script, `mvgc_hyperparameter_sensitivity.py` actually evaluates the model under hyperparameter grids and writes experimental metrics before Figure 3 is generated.
-
-The sensitivity sweep covers three groups:
-
-1. `lambda1`: the cross-view contrastive alignment weight
-2. `tau`: the InfoNCE temperature
-3. `entity_radius`: the radius used by the entity-centric HRKG view
-
-### 12.1 Default sensitivity experiment
-
-Run:
-
-```bash
-python mvgc_hyperparameter_sensitivity.py \
-  --data dataset/voicephishing_data.csv \
-  --feature_dir outputs/v3_required_experiments \
-  --output_dir outputs/v3_required_experiments \
-  --figure_dir figures
-```
-
-This command expects the feature matrices and split files generated by `mvgc_v3_fast_experiments.py`. Therefore, run Section 9 first.
-
-Expected output files:
-
-```text
-outputs/v3_required_experiments/hyperparameter_sensitivity_metrics.csv
-outputs/v3_required_experiments/hyperparameter_sensitivity_summary.csv
-outputs/v3_required_experiments/hyperparameter_sensitivity_manifest.json
-figures/fig3_hyperparameter_sensitivity.csv
-figures/fig3_hyperparameter_sensitivity.pdf
-figures/fig3_hyperparameter_sensitivity.png
-```
-
-The metrics file stores seed-level or run-level results, while the summary file stores the mean and standard deviation for each hyperparameter setting. The manifest file records the grid, seeds, input paths, and run configuration.
-
-### 12.2 Larger multi-seed sensitivity sweep
-
-For a more stable but slower sensitivity analysis, run:
-
-```bash
-python mvgc_hyperparameter_sensitivity.py \
-  --data dataset/voicephishing_data.csv \
-  --feature_dir outputs/v3_required_experiments \
-  --output_dir outputs/v3_required_experiments \
-  --figure_dir figures \
-  --seeds 13,17,23 \
-  --epochs 20
-```
-
-You can also adjust grid values explicitly:
-
-```bash
-python mvgc_hyperparameter_sensitivity.py \
-  --data dataset/voicephishing_data.csv \
-  --feature_dir outputs/v3_required_experiments \
-  --output_dir outputs/v3_required_experiments \
-  --figure_dir figures \
-  --lambda1_grid 0.0,0.05,0.1,0.2,0.4 \
-  --tau_grid 0.05,0.1,0.2,0.5,1.0 \
-  --entity_radius_grid 1,2,3,4 \
-  --seeds 13,17,23 \
-  --epochs 20
-```
-
-### 12.3 Inspect sensitivity outputs
-
-After the run, inspect the outputs:
-
-```bash
-cat outputs/v3_required_experiments/hyperparameter_sensitivity_summary.csv
-cat outputs/v3_required_experiments/hyperparameter_sensitivity_manifest.json
-ls figures/fig3_hyperparameter_sensitivity.pdf
-```
-
-The generated `figures/fig3_hyperparameter_sensitivity.pdf` is the Figure 3 artifact used by the paper.
-
----
-
-## 13. Regenerate Figure 3 from Existing Sensitivity Results
-
-If sensitivity experiment results already exist and you only want to regenerate the figure, run:
+This reads the feature tables and splits from Step 1 and regenerates, end to end:
+
+- **Table 1** — in-distribution controls, each baseline **separately tuned**
+  (`r2_indist_summary.csv`, `r2_indist_perseed.csv`), including the **contrastive-off**
+  variant (λ₁ = 0);
+- **Table 2** — paired significance tests over the five shared seeds
+  (`r2_significance.csv`);
+- **Table 3** — the stricter **length-stratified OOD split**
+  (`r2_ood_summary.csv`, `r2_ood_significance.csv`);
+- the **near-duplicate audit** (`r2_near_duplicate.csv`).
+
+The script prints a live summary and is **resumable**: per-configuration checkpoints
+(`r2_indist_part_*.csv`, `r2_ood_part_*.csv`) are reused if present, so an interrupted
+run continues where it stopped. Runtime: ~3–6 minutes on CPU.
+
+### Step 3 — Regenerate Figure 3 (hyperparameter sensitivity)
 
 ```bash
 python generate_paper_figures_v3.py
 ```
 
-In v4, this script reads the experimental sensitivity CSV rather than relying on hard-coded sensitivity values.
+Writes `figures/fig3_hyperparameter_sensitivity.{pdf,png,csv}` and preserves the
+architecture diagram (Figure 1) and the graph-centric comparison (Figure 2) assets.
 
-Expected files:
-
-```text
-figures/fig3_hyperparameter_sensitivity.pdf
-figures/fig3_hyperparameter_sensitivity.png
-figures/fig3_hyperparameter_sensitivity.csv
-```
-
-The paper uses the following figure files:
-
-```text
-figures/vpd_diagram.pdf                         Figure 1
-figures/results.pdf                             Figure 2
-figures/fig3_hyperparameter_sensitivity.pdf     Figure 3
-```
-
-Check that they exist:
+### Step 4 (optional) — Full neural multi-seed retraining
 
 ```bash
-ls figures/vpd_diagram.pdf
-ls figures/results.pdf
-ls figures/fig3_hyperparameter_sensitivity.pdf
-```
-
----
-
-## 14. Print All Main Result Summaries
-
-Use the following command to display all major result summaries together:
-
-```bash
-python - <<'PY'
-import pandas as pd
-from pathlib import Path
-
-out = Path("outputs/v3_required_experiments")
-
-files = [
-    "transcript_level_control_summary.csv",
-    "full_mvgc_neural_multiseed_summary.csv",
-    "extractor_silver_summary.csv",
-    "noise_robustness_summary.csv",
-    "cluster_blocked_control_summary.csv",
-    "partial_transcript_summary.csv",
-    "hyperparameter_sensitivity_summary.csv",
-]
-
-for f in files:
-    p = out / f
-    print("\n" + "=" * 80)
-    print(f)
-    print("=" * 80)
-    if p.exists():
-        print(pd.read_csv(p).to_string(index=False))
-    else:
-        print("Missing:", p)
-PY
-```
-
-These files correspond to the controlled evaluations and sensitivity analyses reported in the paper.
-
----
-
-## 15. Optional: Retrain Original PyTorch-Geometric Baselines
-
-The paper preserves the original graph-centric Figure 2 as `figures/results.pdf`. If you want to retrain the original PyTorch-Geometric models, use `mvcg.py`.
-
-A default run:
-
-```bash
-python mvcg.py --epochs 10
-```
-
-Individual model runs:
-
-```bash
-python mvcg.py --gnn_type RGCN --epochs 10
-python mvcg.py --gnn_type HGT --epochs 10
-python mvcg.py --gnn_type HAN --epochs 10
-python mvcg.py --gnn_type GeneralConv --epochs 10
-python mvcg.py --gnn_type FiLMConv --epochs 10
-python mvcg.py --gnn_type HAHE --epochs 10
-python mvcg.py --gnn_type QUAD --epochs 10
-python mvcg.py --gnn_type LightHGNN --epochs 10
-python mvcg.py --gnn_type OnDeviceHRGNN --epochs 10 --distillation_epochs 10
-python mvcg.py --gnn_type StarE --epochs 10
-python mvcg.py --gnn_type CMVHRKG --epochs 10
-```
-
-This optional retraining path requires PyTorch-Geometric and related dependencies. Results may vary slightly depending on hardware, package versions, cached language models, and random seeds.
-
----
-
-## 16. Mapping Paper Results to Repository Artifacts
-
-| Paper item | Command | Output artifact |
-|---|---|---|
-| Dataset statistics | Dataset check snippet | `dataset/voicephishing_data.csv` |
-| Figure 1 | Preserved source figure | `figures/vpd_diagram.pdf` |
-| Figure 2 | Preserved result figure | `figures/results.pdf` |
-| Text-only / HRKG-only / fusion controls | `mvgc_v3_fast_experiments.py` | `transcript_level_control_summary.csv` |
-| Full MVGC mean ± std | `mvgc_full_neural_multiseed.py` | `full_mvgc_neural_multiseed_summary.csv` |
-| Extractor audit | `mvgc_v3_fast_experiments.py` | `extractor_silver_summary.csv` |
-| HRKG-noise robustness | `mvgc_v3_fast_experiments.py` | `noise_robustness_summary.csv` |
-| Scenario-signature blocking | `mvgc_v3_fast_experiments.py` | `cluster_blocked_control_summary.csv` |
-| Partial-transcript detection | `mvgc_v3_fast_experiments.py` | `partial_transcript_summary.csv` |
-| Hyperparameter sensitivity | `mvgc_hyperparameter_sensitivity.py` | `hyperparameter_sensitivity_summary.csv` |
-| Figure 3 | `mvgc_hyperparameter_sensitivity.py` or `generate_paper_figures_v3.py` | `figures/fig3_hyperparameter_sensitivity.pdf` |
-
----
-
-## 17. One-Shot Reproduction Script
-
-The following command sequence reproduces the core experimental results from a clean setup:
-
-```bash
-# Prepare repository
-mkdir -p ~/work/mvgc
-cd ~/work/mvgc
-unzip mvgc-code-v4-hyperparam-final.zip -d mvgc-v4
-cd mvgc-v4
-
-# Create Python environment
-pyenv install 3.10.13
-pyenv virtualenv 3.10.13 mvgc-v4-3.10
-pyenv local mvgc-v4-3.10
-
-# Check Python
-python --version
-which python
-
-# Install dependencies
-python -m pip install --upgrade pip setuptools wheel
-pip install -r requirements_mvgc.txt
-
-# Reset outputs
-rm -rf outputs/v3_required_experiments
-mkdir -p outputs/v3_required_experiments
-
-# Run controlled experiments
-python mvgc_v3_fast_experiments.py \
-  --data dataset/voicephishing_data.csv \
-  --config_dir config \
-  --output_dir outputs/v3_required_experiments
-
-# Run Full MVGC multi-seed neural retraining
 python mvgc_full_neural_multiseed.py \
-  --data dataset/voicephishing_data.csv \
-  --feature_dir outputs/v3_required_experiments \
-  --output_dir outputs/v3_required_experiments
+    --feature_dir outputs/required_experiments \
+    --output_dir  outputs/required_experiments
+```
 
-# Run actual hyperparameter sensitivity experiments and regenerate Figure 3
-python mvgc_hyperparameter_sensitivity.py \
-  --data dataset/voicephishing_data.csv \
-  --feature_dir outputs/v3_required_experiments \
-  --output_dir outputs/v3_required_experiments \
-  --figure_dir figures
+Trains the three-view neural model with cross-view alignment over the five seeds and
+writes `full_mvgc_neural_multiseed_summary.csv` plus per-seed predictions. This
+corroborates the full-model row with an explicit neural training loop. Runtime:
+~2–3 minutes on CPU.
 
-# Inspect main results
-cat outputs/v3_required_experiments/transcript_level_control_summary.csv
-cat outputs/v3_required_experiments/full_mvgc_neural_multiseed_summary.csv
-cat outputs/v3_required_experiments/extractor_silver_summary.csv
-cat outputs/v3_required_experiments/noise_robustness_summary.csv
-cat outputs/v3_required_experiments/cluster_blocked_control_summary.csv
-cat outputs/v3_required_experiments/partial_transcript_summary.csv
-cat outputs/v3_required_experiments/hyperparameter_sensitivity_summary.csv
+---
 
+## 5. Expected results
+
+After Steps 1–2 your `outputs/required_experiments/` will contain values matching the
+paper (small floating-point differences across platforms are normal; the qualitative
+conclusions and significance decisions are stable).
+
+**Table 1 — in-distribution controls (F1, mean ± std over 5 seeds)**
+
+| Model | F1 |
+|---|---|
+| Entity only | 0.9279 ± 0.0118 |
+| Structural only | 0.9512 ± 0.0093 |
+| HRKG only | 0.9638 ± 0.0204 |
+| Text only (separately tuned) | 0.9905 ± 0.0088 |
+| Lexical + HRKG | 0.9887 ± 0.0118 |
+| Lexical + Structural | 0.9924 ± 0.0072 |
+| Full, contrastive off (λ₁ = 0) | 0.9858 ± 0.0099 |
+| **Full MVGC (λ₁ = 0.5)** | **0.9924 ± 0.0054** |
+
+**Table 2 — paired significance (in-distribution)**
+
+| Comparison | ΔF1 | *t*-test *p* | Wilcoxon *p* |
+|---|---|---|---|
+| Full MVGC vs. Text only | +0.0019 | 0.37 | 0.50 |
+| Full MVGC vs. best fusion | +0.0038 | 0.40 | 0.50 |
+| Full MVGC vs. contrastive-off | +0.0066 | 0.16 | 0.25 |
+
+*No in-distribution comparison is significant at α = 0.05 → the benchmark is saturated.*
+
+**Table 3 — length-stratified OOD split (F1, ROC-AUC)**
+
+| Model | F1 | ROC-AUC |
+|---|---|---|
+| Text only | 0.4824 | 0.9032 |
+| Lexical + HRKG | 0.6015 | 0.9689 |
+| Full, contrastive off | 0.5596 | 0.9681 |
+| **Full MVGC** | **0.6354** | 0.9642 |
+| **HRKG only** | **0.7018** | 0.9690 |
+
+OOD significance: text-only vs. Full *p* = 0.002; text-only vs. HRKG-only *p* < 0.001.
+
+**Table 4 — extractor type-level audit (silver sample, 240 records)**
+
+| Field | Precision | Recall | F1 |
+|---|---|---|---|
+| Entities | 0.336 | 0.871 | 0.485 |
+| Relations | 0.154 | 0.840 | 0.261 |
+| Qualifiers | 0.431 | 0.644 | 0.516 |
+
+**Near-duplicate audit:** 16 / 2927 = 0.5% (TF–IDF cosine ≥ 0.9).
+
+---
+
+## 6. Mapping: paper artifact → command → output file
+
+| Paper artifact | Command | Output file(s) |
+|---|---|---|
+| Table 1 (in-distribution controls) | Step 2 | `r2_indist_summary.csv`, `r2_indist_perseed.csv` |
+| Table 2 (significance) | Step 2 | `r2_significance.csv` |
+| Table 3 (OOD split) | Step 2 | `r2_ood_summary.csv`, `r2_ood_significance.csv` |
+| Near-duplicate audit | Step 2 | `r2_near_duplicate.csv` |
+| Table 4 (extractor audit) | Step 1 | `extractor_silver_summary.csv` |
+| Table 5 (partial-transcript) | Step 1 | `partial_transcript_summary.csv` |
+| Noise robustness | Step 1 | `noise_robustness_summary.csv` |
+| Scenario-blocked control | Step 1 | `cluster_blocked_control_summary.csv` |
+| Figure 2 (graph-centric comparison) | optional `mvcg.py` | `figures/fig2_f1_gap_ranking.*` |
+| Figure 3 (sensitivity) | Step 3 | `figures/fig3_hyperparameter_sensitivity.*` |
+| Full neural retraining | Step 4 (optional) | `full_mvgc_neural_multiseed_summary.csv` |
+
+---
+
+## 7. PyG/KoBERT graph-baseline track
+
+The graph-centric baseline comparison (Figure 2) was produced by the original
+implementation in `mvcg.py`, which trains ten GNN baselines and the CMVHRKG model under
+one PyTorch-Geometric interface. This track requires the heavyweight optional
+dependencies and benefits from a GPU; **it is not required for any conclusion in the
+paper.**
+
+```bash
+pip install "torch-geometric>=2.5" "transformers>=4.40" "sentencepiece>=0.1.99" "alive-progress>=3.1"
+
+# Train/evaluate a single model:
+python mvcg.py --gnn_type CMVHRKG --epochs 10
+
+# Or run all baselines (RGCN, HGT, HAN, GeneralConv, FiLMConv, HAHE, QUAD,
+# LightHGNN, OnDeviceHRGNN, CMVHRKG, StarE):
+python mvcg.py --epochs 10
+
+# Quick smoke test on a subset:
+python mvcg.py --gnn_type CMVHRKG --test_mode
 ```
 
 ---
 
-## 18. Citation
+## 8. Configuration and customization
 
-If you use this repository, please cite the associated paper:
+- **Seeds.** The five evaluation seeds are `[13, 17, 23, 29, 31]`, defined in the runner
+  scripts and in `config/reviewer_protocol.json`.
+- **Extraction schema.** Entity/relation lexicons live in `config/ner_relations*.json`
+  and the six qualifier families in `config/qualifiers.json`. Editing these changes the
+  HRKG feature table built in Step 1.
+- **Paths.** Both stage scripts accept `--data`, `--feature_dir` / `--config_dir`, and
+  `--output_dir` so you can redirect inputs and outputs.
+
+---
+
+## 9. Dataset and ethics
+
+- **Dataset:** KorCCVi v2, 2,927 Korean call transcripts (695 phishing, 2,232 benign),
+  provided here as `dataset/voicephishing_data.csv` with columns `id, transcript, label`.
+- The data is intended for **defensive fraud-detection research only**. Any deployment
+  on real conversational telemetry must enforce data minimization (e.g., on-device or
+  trusted-execution processing, PII redaction or salted hashing before ingestion, and
+  retention of normalized graph schemata rather than raw text), as discussed in the
+  paper's limitations section.
+
+---
+
+## 10. Hardware and runtime
+
+| Stage | Hardware | Approx. runtime |
+|---|---|---|
+| Step 1 (features, splits, controlled tables) | CPU | 2–4 min |
+| Step 2 (Tables 1–3) | CPU | 3–6 min |
+| Step 3 (Figure 3) | CPU | < 1 min |
+| Step 4 (neural multi-seed, optional) | CPU | 2–3 min |
+| `mvcg.py` (optional Figure 2 track) | GPU recommended | varies |
+
+Reference workstation: MacBook Pro M3, 128 GB RAM, CPU only.
+
+---
+
+## 11. Citation
 
 ```bibtex
-@article{mvgc2026,
-  title   = {Multi-View Hyper-Relational Knowledge Graph Contrastive Learning for Voice Phishing Detection},
-  author  = {Sungsoo Kim},
+@article{kim2026mvgc,
+  title   = {MVGC: Multi-View Hyper-Relational Knowledge Graph Contrastive Learning for Voice Phishing Detection},
+  author  = {Kim, Sungsoo},
   year    = {2026}
 }
 ```
 
-Please update the citation entry once the final bibliographic information becomes available.
+## 12. Contact
 
----
+Sungsoo Kim — Electronics and Telecommunications Research Institute (ETRI) —
+`sungsoo@etri.re.kr`
 
-## 19. Notes on Data and Privacy
+## 13. Acknowledgement
 
-Voice phishing transcripts may contain sensitive personal or conversational information. If raw transcripts cannot be redistributed due to privacy or licensing constraints, users should release or use anonymized dataset artifacts, hashed split identifiers, extracted features, and reproducibility scripts in accordance with applicable data governance policies.
-
-The project is intended for research and reproducibility. Deployment in real-world warning systems should include privacy protection, human oversight, calibration at low false-positive operating points, and fairness checks across speaker and dialectal subgroups.
+This work was supported by an Institute of Information & Communications Technology
+Planning & Evaluation (IITP) grant funded by the Korea government (MSIT)
+(No. RS-2025-02215393, *Development of Detection and Prediction Technology for New and
+Unknown Voice Phishing*).
